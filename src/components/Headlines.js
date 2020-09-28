@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { makeApiCall } from '../actions';
 
 class Headlines extends React.Component {
   constructor(props) {
@@ -29,11 +31,13 @@ class Headlines extends React.Component {
   // }
 
   componentDidMount() {
-    this.makeApiCall()
+    // Now we'll use dispatch() to make our API call.
+    const { dispatch } = this.props;
+    dispatch(makeApiCall());
   }
 
   render() {
-  const { error, isLoaded, headlines } = this.state;
+  const { error, isLoaded, headlines } = this.props;
   if (error) {
     return <React.Fragment>Error: {error.message}</React.Fragment>;
   } else if (!isLoaded) {
@@ -56,4 +60,12 @@ class Headlines extends React.Component {
 }
 }
 
-export default Headlines;
+const mapStateToProps = state => {
+  return {
+    headlines: state.headlines,
+    isLoading: state.isLoading,
+    error: state.error
+  }
+}
+
+export default connect(mapStateToProps)(Headlines);
