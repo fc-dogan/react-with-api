@@ -16,7 +16,12 @@ export default (state = initialState , action) => {
       return Object.assign({}, state, {
         isLoading: false,
         headlines: action.headlines //headlines property is set to action.headlines - the payload we've passed into our action.
-      })
+      });
+    case c.GET_HEADLINES_FAILURE:
+      return Object.assign({},state, {
+        isLoading: false,
+        error: action.error
+      } )
     default :
     return state;
   }
