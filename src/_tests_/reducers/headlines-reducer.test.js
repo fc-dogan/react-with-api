@@ -8,6 +8,11 @@ describe('headlinesReducer', () => {
     headlines: [],
     error: null
   };
+  const loadingState = {
+    isLoading: true,
+    headlines: [],
+    error: null
+  };
 
   test('should successfully return the default state if no action is passed into it', () => {
     expect(headlinesReducer(defaultState, {type: null })).toEqual(
